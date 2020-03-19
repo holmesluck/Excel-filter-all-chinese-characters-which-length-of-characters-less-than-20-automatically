@@ -1,0 +1,30 @@
+Sub FindChinese()
+
+Dim irng As Range: Set irng = Selection
+'Selection表示选中的区域，即：先选中区域，再切换到代码页运行本程序
+'可换成其他区域，如：irng = range("A1:D5") ，表示对A1:D5区域做动作
+
+Dim x As Integer
+Dim MyStr As String
+Dim s As String
+Dim t As String
+For Each c In irng
+s = c.Value
+Count = 0
+MyStr = ""
+If s <> "" Then
+For x = 1 To Len(s)
+t = Mid(s, x, 1)
+If t Like "[a-zA-Z]" = False Then
+    MyStr = MyStr & t
+Else
+    Count = Count + 1
+End If
+Next x
+MsgBox (Len(s) - Count)
+If Len(s) - Count <= 20 Then
+c.Value = MyStr
+End If
+End If
+Next
+End Sub
